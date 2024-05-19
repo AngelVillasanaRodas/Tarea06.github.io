@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grado de eficiencia del operario</title>
+<link rel="stylesheet" href="estilos2.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Grado de eficiencia del operario</h2>
+    <form id="calcForm">
+      <label for="defects">Número de tornillos defectuosos:</label>
+      <input type="number" id="defects" name="defects" min="0" required>
+      <label for="produced">Número de tornillos producidos:</label>
+      <input type="number" id="produced" name="produced" min="0" required>
+      <button type="submit">Calcular</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('calcForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const defects = parseInt(document.getElementById('defects').value);
+      const produced = parseInt(document.getElementById('produced').value);
+      let efficiencyGrade;
+
+      if (defects < 200 && produced > 10000) {
+        efficiencyGrade = 8;
+      } else if (defects < 200) {
+        efficiencyGrade = 6;
+      } else if (produced > 10000) {
+        efficiencyGrade = 7;
+      } else {
+        efficiencyGrade = 5;
+      }
+
+      const resultElement = document.getElementById('result');
+      resultElement.textContent = `Grado de eficiencia: ${efficiencyGrade}`;
+    });
+  </script>
+</body>
+</html>

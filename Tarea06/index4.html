@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promedio de prácticas</title>
+<link rel="stylesheet" href="estilos4.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Promedio de prácticas</h2>
+    <form id="calcForm">
+      <label for="practice1">Nota práctica 1:</label>
+      <input type="number" id="practice1" name="practice1" step="0.01" min="0" required>
+      <label for="practice2">Nota práctica 2:</label>
+      <input type="number" id="practice2" name="practice2" step="0.01" min="0" required>
+      <label for="practice3">Nota práctica 3:</label>
+      <input type="number" id="practice3" name="practice3" step="0.01" min="0" required>
+      <label for="practice4">Nota práctica 4:</label>
+      <input type="number" id="practice4" name="practice4" step="0.01" min="0" required>
+      <button type="submit">Calcular</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('calcForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const practice1 = parseFloat(document.getElementById('practice1').value);
+      const practice2 = parseFloat(document.getElementById('practice2').value);
+      const practice3 = parseFloat(document.getElementById('practice3').value);
+      const practice4 = parseFloat(document.getElementById('practice4').value);
+
+      // Ordenar las notas de práctica de mayor a menor
+      const sortedPractices = [practice1, practice2, practice3, practice4].sort((a, b) => b - a);
+
+      // Eliminar la nota menor
+      const minPractice = sortedPractices.pop();
+
+      // Calcular el promedio de las tres notas más altas
+      const average = sortedPractices.reduce((acc, val) => acc + val, 0) / 3;
+
+      const resultElement = document.getElementById('result');
+      resultElement.innerHTML = `
+        <p>Nota eliminada: ${minPractice}</p>
+        <p>Promedio de prácticas: ${average.toFixed(2)}</p>
+      `;
+    });
+  </script>
+</body>

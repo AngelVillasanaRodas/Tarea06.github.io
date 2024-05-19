@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Determinar anemia</title>
+<link rel="stylesheet" href="estilos5.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Determinar anemia</h2>
+    <form id="calcForm">
+      <label for="age">Edad (en meses):</label>
+      <input type="number" id="age" name="age" min="0" required>
+      <label for="hemoglobin">Nivel de hemoglobina (g%):</label>
+      <input type="number" id="hemoglobin" name="hemoglobin" step="0.1" required>
+      <label for="sex">Sexo:</label>
+      <select id="sex" name="sex" required>
+        <option value="male">Masculino</option>
+        <option value="female">Femenino</option>
+      </select>
+      <button type="submit">Calcular</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('calcForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const age = parseInt(document.getElementById('age').value);
+      const hemoglobin = parseFloat(document.getElementById('hemoglobin').value);
+      const sex = document.getElementById('sex').value;
+      let result;
+
+      if (age <= 1 && hemoglobin < 13) {
+        result = "Positivo";
+      } else if (age > 1 && age <= 6 && hemoglobin < 10) {
+        result = "Positivo";
+      } else if (age > 6 && age <= 12 && hemoglobin < 11) {
+        result = "Positivo";
+      } else if (age > 12 && age <= 60 && hemoglobin < 11.5) {
+        result = "Positivo";
+      } else if (age > 60 && age <= 120 && hemoglobin < 12.6) {
+        result = "Positivo";
+      } else if (age > 120 && age <= 180 && hemoglobin < 13) {
+        result = "Positivo";
+      } else {
+        result = "Negativo";
+      }
+
+      const resultElement = document.getElementById('result');
+      resultElement.textContent = `Resultado: ${result}`;
+    });
+  </script>
+</body>
+</html>

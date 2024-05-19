@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de descuento en manzanas</title>
+<link rel="stylesheet" href="estilos3.css">
+  
+</head>
+<body>
+  <div class="container">
+    <h2>Calculadora de descuento en manzanas</h2>
+    <form id="calcForm">
+      <label for="kilos">Número de kilos de manzanas:</label>
+      <input type="number" id="kilos" name="kilos" step="0.01" min="0" required>
+      <button type="submit">Calcular</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('calcForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const kilos = parseFloat(document.getElementById('kilos').value);
+      let discount;
+
+      if (kilos <= 2) {
+        discount = 0;
+      } else if (kilos <= 5) {
+        discount = 10;
+      } else if (kilos <= 10) {
+        discount = 15;
+      } else {
+        discount = 20;
+      }
+
+      const totalPrice = kilos * 100; // Precio por kilo de manzanas (ejemplo: $100)
+      const discountedPrice = totalPrice - (totalPrice * discount / 100);
+
+      const resultElement = document.getElementById('result');
+      resultElement.textContent = `Total a pagar: $${discountedPrice.toFixed(2)}`;
+    });
+  </script>
+</body>
+</html>
